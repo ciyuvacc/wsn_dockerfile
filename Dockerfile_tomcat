@@ -1,0 +1,15 @@
+FROM  docker.io/centos:6.6
+MAINTAINER  WangSen 
+#ADD jre-1.7.0_17 /jre
+#ADD jre-1.8.0_91 /usr/local/jdk
+ADD jre-1.7.0_17 /usr/local/jdk
+ADD apache-tomcat-7.0.64 /tomcat
+ENV JRE_HOME /usr/local/jdk
+ENV PATH $PATH:$JRE_HOME/bin
+RUN mkdir -p "$JRE_HOME"
+ENV CATALINA_HOME /tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH 
+RUN mkdir -p "$CATALINA_HOME" 
+WORKDIR $CATALINA_HOME
+EXPOSE  8080
+CMD ["catalina.sh","run"]
